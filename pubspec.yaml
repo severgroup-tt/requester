@@ -1,6 +1,6 @@
 name: requester
 description: Provides a middlware API for package:http
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/johnpryan/requester
 author: John Ryan <john.p.ryan4@gmail.com>
 

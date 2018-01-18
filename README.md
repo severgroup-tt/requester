@@ -1,22 +1,38 @@
 # requester
 
-A library for Dart developers.
+Send `package:http` requests with middleware
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+## example
 
-## Usage
+```
+import 'dart:async';
+import 'package:requester/requester.dart';
+import 'package:http/http.dart';
 
-A simple usage example:
+Future main() async {
+  var client = new Client();
+  var requester = new Requester(client);
+  requester.addMiddleware(new LoggingMiddleware());
+  var request = new HackernewsRequest("dart");
+  await requester.send(request);
+  print('done!');
+}
 
-    import 'package:requester/requester.dart';
+class HackernewsRequest extends Request {
+  HackernewsRequest(String query)
+      : super("GET",
+            Uri.parse("http://hn.algolia.com/api/v1/search?query=$query")) {
+    this.headers['Content-Type'] = 'application/json';
+  }
+}
 
-    main() {
-      var awesome = new Awesome();
-    }
+// response:
+//   ╭--- cURL (http://hn.algolia.com/api/v1/search?query=dart)
+//   curl -X GET -H "Content-Type: application/json" http://hn.algolia.com/api/v1/search?query=dart
+//   ╰--- (copy and paste the above line to a terminal)
+//   Response: 200
+//   {"hits":[{"created_at":"2011-10-10T07:03:34.000Z" ...
+//   done!
+```
 
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
+see the full example in the /example directory.
