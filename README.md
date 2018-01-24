@@ -4,7 +4,7 @@ Send `package:http` requests with middleware
 
 ## example
 
-```
+```dart
 import 'dart:async';
 import 'package:requester/requester.dart';
 import 'package:http/http.dart';
