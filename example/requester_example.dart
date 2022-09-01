@@ -36,8 +36,8 @@ class LoggingMiddleware extends BaseMiddleware {
     curlCmd += " -X " + request.method;
     var compressed = false;
     request.headers.forEach((name, value) {
-      if (name?.toLowerCase() == "accept-encoding" &&
-          value?.toLowerCase() == "gzip") {
+      if (name.toLowerCase() == "accept-encoding" &&
+          value.toLowerCase() == "gzip") {
         compressed = true;
       }
       curlCmd += " -H \"$name: $value\"";
